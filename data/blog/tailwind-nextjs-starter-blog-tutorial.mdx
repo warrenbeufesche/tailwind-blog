@@ -1,0 +1,202 @@
+---
+title: 'Tailwind Nextjs Starter Blog v2.0 Tutorial'
+date: '2023-09-09'
+lastmod: '2023-09-09'
+tags: ['next-js', 'tailwind', 'tutorial']
+draft: false
+summary: 'Tailwind Nextjs Starter Blog v2.0 Tutorial. One of the leading Next.js React Framework blog templates with thousands of users. This release supports Next.js 13.4 React Framework App Router using the Nextjs App directory and React Server Components.'
+images: []
+---
+
+## Introduction
+
+Welcome to the Tailwind Nextjs Starter Blog v2.0 Tutorial. This is a Next.js, Tailwind CSS blog starter template created by Timothy Lin. It includes the latest technologies, such as React, Next.js 13.4, Tailwind 3.0. It also includes ContentLayer to manage content logic and Pliny for analytics, comments, and newsletters. It makes technical writing a breeze. Easily configurable and customizable. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
+
+This template uses the Next.js 13.4 App Router which was released Spring 2023. The App Router replaced the Page Router and is now the preferred method for building Nest.js websites.
+
+This tutorial is for new developers and those not familiar with Next.js and Tailwind. If you are familiar with Next.js and Tailwind you may want to go to GitHub repo and [view the README.md](https://github.com/timlrx/tailwind-nextjs-starter-blog).
+
+If you want to view additional websites that have been created with this template:
+
+- [Demo Blog](https://tailwind-nextjs-starter-blog.vercel.app/) - This repo
+- [Quasilinear Musings](https://www.timlrx.com) - The website of Timothy Lin, the developer of this template. Modified to auto-generate blog posts with dates.
+- [ben.codes blog](https://ben.codes) - Benoit's personal blog about software development ([source code](https://github.com/bendotcodes/bendotcodes))
+- [SOTO's Blog](https://www.atksoto.com/) - A more personalized personal website upgraded from V1 ([source code](https://github.com/acsoto/soto-blog-nextjs))
+- [Prabhu's Blog](https://prabhukirankonda.vercel.app) - Prabhu's Personal website with blog ([source code](https://github.com/prabhukiran8790/prabhukirankonda))
+
+## Quick Start Guide
+
+### Preparation
+
+Make sure you have the latest versions of Node.js, yarn, and GitHub installed.
+
+### Clone the GitHub Repository
+
+To download the application to your local computer at the Terminal enter:
+
+```bash
+npx degit 'timlrx/tailwind-nextjs-starter-blog'
+```
+
+### Installation
+
+To install the applicaiton at the Terminal enter:
+
+```bash
+yarn
+```
+
+### Extensions for VS Code
+
+If you are using VS Code you may want to install the following extensions.
+
+- ES7+React/Redux/React-Native snippets
+- ESLint
+- Tailwind CSS Intellisense
+
+### Development Server
+
+Start the development server at the Terminal:
+
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Personalize the Site
+
+Open the `data/siteMetadata.js` file. This file contains most of the site related information which can be modified for a user's need. For now, change the author, headerTitle, and email settings using your information. Analytics, comments, newsletter, and other settings are in this file. You can come back to these setings later and change them. Do not change the siteLogo setting, it does not change to logo on the homepage. That is actually done in a different location that we will cover later.
+
+### Pesonalize the Default Author Information
+
+Open the `data/authors/default.md` file and update this file with your own information. Additional authors can be added as files in `data/authors` folder.
+
+```mdx:data/authors/default.mdx
+---
+name: Warren Beufesche
+avatar: /static/images/avatar.png
+occupation: Web3 Developer and Investor
+company:
+email: warrenbeufesche@protonmail.com
+twitter: https://twitter.com/warrenbeufesche
+linkedin: https://www.linkedin.com
+github: https://github.com/warrenbeufesche
+---
+
+Warren is a Web3 Developer and Investor residing in Paris, France and Omaha, Nebraska, USA.
+```
+
+### Add a Blog Post
+
+Select the `data/blog` folder. Add a new file, "first-post.mdx". Enter the following in that file.
+
+```mdx:data/blog/first-post.mdx
+---
+title: 'First Post'
+date: '2023-09-08'
+lastmod: '2023-09-08'
+tags: ['next-js', 'tailwind']
+draft: false
+summary: 'My first post.'
+images: []
+---
+```
+
+The new post will automatically be added to the blog posts.
+
+### Modify Navigation Links
+
+Open the `data/headerNavLinks.ts` to customize the navigation links. Change the file as follows. I have commented out the projects menu item, but you may want to leave that in.
+
+```ts:data/headerNavLinks.ts
+const headerNavLinks = [
+  { href: '/', title: 'Home' },
+  { href: '/blog', title: 'Blog' },
+  { href: '/tags', title: 'Tags' },
+  // { href: '/projects', title: 'Projects' },
+  { href: '/interests', title: 'Interests' },
+  { href: '/about', title: 'About' },
+]
+
+export default headerNavLinks
+```
+
+Then create an `/app/interests` folder. In that folder add a file, `page.tsx` and enter the following code.
+
+```tsx:app/interests/page.tsx
+import { genPageMetadata } from 'app/seo'
+
+export const metadata = genPageMetadata({ title: 'Interests' })
+
+export default function Page() {
+  return (
+    <>
+      <h1>Interests</h1>
+    </>
+  )
+}
+```
+
+### Change the Logo
+
+You can change the Tailwind logo located at the top left of the home page. Go to `data/logo.svg` and rename that file to `logo-original.svg`. Copy the logo file of your choice into the `data/logo.svg` file. Open the `components/Header.tsx` file. About line 16 add the `className="w6"` to the Logo component. Of course you can modify this "w6" to the size you choice.
+
+```tsx:components/Header.tsx
+        <div className="mr-3">
+          <Logo className="w-6" />
+        </div>
+```
+
+### Change the Avatar image
+
+You can see the avatar image on the About page. You can change this image to your own. Go to `public/static/images/avatar.png` and rename that file to `avatar-original.Painting`. Copy the image file of your choice into the `public/static/images/avatar.png` file. Make sure you refresh your browser to see the new image.
+
+### Optional configuration
+
+#### Modify the Projects page
+
+Open the `data/projectsData.ts` file and modify it to generate the styled card on the projects page.
+
+Edit the content in `data`
+
+#### Store Assets
+
+`public/static` - store assets such as images and favicons.
+
+#### Configure Tailwind
+
+`tailwind.config.js` and `css/tailwind.css` - tailwind configuration and stylesheet which can be modified to change the overall look and feel of the site.
+
+#### Configure Contentlayer
+
+`contentlayer.config.ts` - configuration for Contentlayer, including definition of content sources and MDX plugins used. See [Contentlayer documentation](https://www.contentlayer.dev/docs/getting-started) for more information.
+
+#### Configure React Components
+
+`components/MDXComponents.js` - pass your own JSX code or React component by specifying it over here. You can then use them directly in the `.mdx` or `.md` file. By default, a custom link, `next/image` component, table of contents component and Newsletter form are passed down. Note that the components should be default exported.
+
+#### Configure Layouts
+
+The primary layout is `app\layout.tsx`.
+
+The pages templates are in the `layouts` directory.
+
+- There are currently 3 post layouts available: `PostLayout`, `PostSimple` and `PostBanner`. `PostLayout` is the default 2 column layout with meta and author information. `PostSimple` is a simplified version of `PostLayout`, while `PostBanner` features a banner image.
+- There are 2 blog listing layouts: `ListLayout`, the layout used in version 1 of the template with a search bar and `ListLayoutWithTags`, currently used in version 2, which omits the search bar but includes a sidebar with information on the tags.
+
+#### Modify Content Security Policy
+
+Open and modify the `next.config.js` file it if you need to adapt the Content Security Policy to load scripts, images, etc. from other domains.
+
+#### Modify Code Highlighting
+
+Open and modify the `css/prism.css` file to control the styles associated with the code blocks. Feel free to customize it and use your preferred prismjs theme e.g. [prism themes](https://github.com/PrismJS/prism-themes).
+
+### Deploy on Vercel
+
+The easiest way to deploy the template is to deploy on [Vercel](https://vercel.com). Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+```
+
+```
